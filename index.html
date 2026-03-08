@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Helper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Nunito:wght@500;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <div class="bg-bubbles" aria-hidden="true"></div>
+    <main class="shell">
+        <section class="hero card">
+            <p class="badge">Green-Tech Inventory</p>
+            <h1>Inventory Helper</h1>
+            <p class="subtitle">Add items and ask questions.</p>
+        </section>
+
+        <section class="layout">
+            <article class="card add-card">
+                <h2>Add Item</h2>
+                <form id="add-form" class="add-form">
+                    <label>
+                        Item Name
+                        <input id="name" name="name" placeholder="Coffee Beans" required />
+                    </label>
+                    <label>
+                        Category
+                        <input id="category" name="category" placeholder="Cafe" value="General" />
+                    </label>
+                    <div class="split">
+                        <label>
+                            Quantity
+                            <input id="quantity" name="quantity" type="number" min="0" value="1" required />
+                        </label>
+                        <label>
+                            Expiry
+                            <input id="expiry" name="expiry" type="date" />
+                        </label>
+                    </div>
+                    <label class="check-row">
+                        <input id="never-expiry" name="neverExpiry" type="checkbox" />
+                        Never expires
+                    </label>
+                    <label>
+                        Usage Unit
+                        <select id="usage-unit" name="usageUnit">
+                            <option value="day" selected>day</option>
+                        </select>
+                    </label>
+                    <button type="submit">Add To Inventory</button>
+                </form>
+            </article>
+
+            <article class="card ask-card">
+                <h2>Navigation Box</h2>
+                <p class="hint">Try: <code>add milk quantity 2 expiring 2026-08-08</code>,
+                    <code>how many coffee beans do i have?</code>, <code>consume 1 coffee beans</code>
+                </p>
+                <form id="ask-form" class="ask-form">
+                    <textarea id="question" placeholder="Ask anything about your inventory..." rows="4"
+                        required></textarea>
+                    <button type="submit">Ask</button>
+                </form>
+                <button id="sustainability-report-btn" type="button" class="ghost">General Insights
+                    Sustainability</button>
+                <div id="answer" class="answer">No question asked yet.</div>
+            </article>
+        </section>
+
+        <section class="card inventory-card">
+            <div class="inventory-header">
+                <h2>Inventory</h2>
+            </div>
+            <div id="inventory-list" class="inventory-list"></div>
+
+            <form id="edit-form" class="edit-form hidden">
+                <h3>Edit Item</h3>
+                <p class="hint">Quantity edits are treated as corrections and do not change daily consumed totals.</p>
+                <label>
+                    Item Name
+                    <input id="edit-name" name="name" required />
+                </label>
+                <label>
+                    Category
+                    <input id="edit-category" name="category" />
+                </label>
+                <div class="split">
+                    <label>
+                        Quantity
+                        <input id="edit-quantity" name="quantity" type="number" min="0" required />
+                    </label>
+                    <label>
+                        Expiry
+                        <input id="edit-expiry" name="expiry" type="date" />
+                    </label>
+                </div>
+                <label class="check-row">
+                    <input id="edit-never-expiry" name="neverExpiry" type="checkbox" />
+                    Never expires
+                </label>
+                <div class="edit-actions">
+                    <button type="submit">Save Changes</button>
+                    <button id="cancel-edit" type="button" class="ghost">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <template id="item-template">
+        <article class="item">
+            <div>
+                <h3 class="item-name"></h3>
+                <p class="meta"></p>
+            </div>
+            <div class="item-side">
+                <p class="qty"></p>
+                <button class="tiny edit-item-btn" type="button">Edit</button>
+            </div>
+        </article>
+    </template>
+
+    <div id="overpurchase-modal" class="modal hidden" role="dialog" aria-modal="true"
+        aria-labelledby="overpurchase-title">
+        <div class="modal-card">
+            <h3 id="overpurchase-title">Overpurchase Check</h3>
+            <p id="overpurchase-message" class="modal-message"></p>
+            <div class="edit-actions">
+                <button id="overpurchase-confirm" type="button">Yes, Add Anyway</button>
+                <button id="overpurchase-cancel" type="button" class="ghost">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
