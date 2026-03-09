@@ -2,7 +2,7 @@ Candidate Name: Iris Ho
 
 Scenario Chosen: Green-Tech Inventory Assistant
 
-Video Walkthrough: https://youtu.be/iV2XraSfWLs
+Video Walkthrough: https://youtu.be/h6e9955mir0
 
 Estimated Time Spent: 5 hours
 
